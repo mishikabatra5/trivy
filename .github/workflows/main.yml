@@ -42,7 +42,7 @@ jobs:
           cat trivy-report.html  # Print the report to the console for debugging
 
       - name: Upload Trivy report
-        uses: actions/upload-artifact@v2  # Use v2 for upload-artifact
+        uses: actions/upload-artifact@v4  # Use v2 for upload-artifact
         with:
           name: trivy-report
           path: trivy-report.html
