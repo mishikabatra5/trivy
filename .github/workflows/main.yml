@@ -30,9 +30,9 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: 'nginx:latest'  # Scanning the pulled Nginx image
-          format: 'template'
+          format: 'table'
           template: '/home/runner/work/trivy/trivy/html.tpl'  # Path to your template file
-          output: 'trivy-report.html'
+          # output: 'trivy-report.html'
           exit-code: '1'  # Fail the job if vulnerabilities are found
           ignore-unfixed: true
           vuln-type: 'os,library'
