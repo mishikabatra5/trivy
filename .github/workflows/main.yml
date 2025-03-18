@@ -28,7 +28,7 @@ jobs:
         with:
           image-ref: 'nginx:latest'  # Scanning the pulled Nginx image
           format: 'template'
-          template: '@$HOME/html.tpl'  # Path to your template file
+          template: './html.tpl'  # Path to your template file
           output: 'trivy-report.html'
           exit-code: '1'  # Fail the job if vulnerabilities are found
           ignore-unfixed: true
