@@ -28,7 +28,7 @@ jobs:
         with:
           image-ref: 'nginx:latest'  # Scanning the pulled Nginx image
           format: 'template'
-          template: 'html.tpl'  # Path to your template file
+          template: 'templates/html.tpl'  # Path to your template file
           output: 'trivy-report.html'
           exit-code: '1'  # Fail the job if vulnerabilities are found
           ignore-unfixed: true
@@ -37,7 +37,7 @@ jobs:
           severity: 'CRITICAL'
 
       - name: Upload Trivy report
-        uses: actions/upload-artifact@v3  # Updated to the latest version
+        uses: actions/upload-artifact@v2  # Use v2 for upload-artifact
         with:
           name: trivy-report
           path: trivy-report.html
