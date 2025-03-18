@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Updated to use v4
+        uses: actions/checkout@v4
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v1
@@ -28,7 +28,7 @@ jobs:
         with:
           image-ref: 'nginx:latest'  # Scanning the pulled Nginx image
           format: 'template'
-          template: 'html.tpl'  # Path to your template file
+          template: 'templates/html.tpl'  # Path to your template file
           output: 'trivy-report.html'
           exit-code: '1'  # Fail the job if vulnerabilities are found
           ignore-unfixed: true
@@ -36,8 +36,12 @@ jobs:
           cache: 'true'
           severity: 'CRITICAL'
 
+      - name: Display Trivy report
+        run: |
+          cat trivy-report.html  # Print the report to the console for debugging
+
       - name: Upload Trivy report
-        uses: actions/upload-artifact@v4 # Use v2 for upload-artifact
+        uses: actions/upload-artifact@v2
         with:
           name: trivy-report
           path: trivy-report.html
