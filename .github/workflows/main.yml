@@ -21,7 +21,7 @@ jobs:
 
       - name: Pull Nginx Docker image
         run: |
-          docker pull nginx:latest
+          docker pull nginx:1.9.12
           ls -la
           pwd
           
@@ -29,7 +29,7 @@ jobs:
       - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: 'nginx:latest'  # Scanning the pulled Nginx image
+          image-ref: 'nginx:1.9.12'  # Scanning the pulled Nginx image
           format: 'table'
           template: '/home/runner/work/trivy/trivy/html.tpl'  # Path to your template file
           # output: 'trivy-report.html'
