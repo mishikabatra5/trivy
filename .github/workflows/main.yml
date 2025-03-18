@@ -37,7 +37,7 @@ jobs:
           severity: 'CRITICAL'
 
       - name: Upload Trivy report
-        uses: actions/upload-artifact@v2  # Use v2 for upload-artifact
+        uses: actions/upload-artifact@v24 # Use v2 for upload-artifact
         with:
           name: trivy-report
           path: trivy-report.html
