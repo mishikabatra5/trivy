@@ -22,6 +22,9 @@ jobs:
       - name: Pull Nginx Docker image
         run: |
           docker pull nginx:latest
+          ls -la
+          pwd
+          
 
       - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@0.28.0
@@ -34,10 +37,11 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           cache: 'true'
-          severity: 'CRITICAL'
+          severity: 'CRITICAL,HIGH,LOW'
 
       - name: Display Trivy report
         run: |
+          ls -la
           cat trivy-report.html  # Print the report to the console for debugging
 
       - name: Upload Trivy report
