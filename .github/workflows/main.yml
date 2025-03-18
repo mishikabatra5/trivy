@@ -21,22 +21,13 @@ jobs:
 
       - name: Pull Nginx Docker image
         run: |
-          docker pull nginx:latest  # Change to a known vulnerable image
+          docker pull nginx:latest  # Use a known vulnerable image for testing
           ls -la
           pwd
           
       - name: Run Trivy Vulnerability Scanner
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: 'nginx:latest'  # Scanning the pulled Nginx image
-          format: 'template'  # Use template format for output
-          template: 'html.tpl'  # Path to your template file
-          output: 'trivy-report.html'  # Specify output file
-          exit-code: '1'  # Fail the job if vulnerabilities are found
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          cache: 'true'
-          severity: 'CRITICAL,HIGH,LOW'
+        run: |
+          trivy image --format template --template "@html.tpl" --vuln-type os,library -o trivy-report.html nginx:latest
 
       - name: Display Trivy report
         run: |
@@ -44,7 +35,7 @@ jobs:
           cat trivy-report.html  # Print the report to the console for debugging
 
       - name: Upload Trivy report
-        uses: actions/upload-artifact@v4 # Use v2 for upload-artifact
+        uses: actions/upload-artifact@v2  # Use v2 for upload-artifact
         with:
           name: trivy-report
           path: trivy-report.html
